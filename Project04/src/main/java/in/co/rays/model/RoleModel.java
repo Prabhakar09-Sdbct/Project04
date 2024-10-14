@@ -51,7 +51,7 @@ public class RoleModel {
 		psmt.setString(4, bean.getModifiedBy());
 		psmt.setTimestamp(6, bean.getCreatedDateTime());
 		psmt.setTimestamp(7, bean.getModifiedDateTime());
-		psmt.setInt(7, bean.getId());
+		psmt.setLong(8, bean.getId());
 
 		int i = psmt.executeUpdate();
 
@@ -87,9 +87,29 @@ public class RoleModel {
 		return bean;
 	}
 	
+	public RoleBean findByName(String name) throws Exception {
+		Connection con = JDBCDataSourceRb.getConnection();
+		PreparedStatement psmt = con.prepareStatement("select * from st_role where name = ?");
+		psmt.setString(1, name);
+
+		RoleBean bean = null;
+		ResultSet rs = psmt.executeQuery();
+		while (rs.next()) {
+			bean = new RoleBean();
+			bean.setId(rs.getInt(1));
+			bean.setName(rs.getString(2));
+			bean.setDescription(rs.getString(3));
+			bean.setCreatedBy(rs.getString(4));
+			bean.setModifiedBy(rs.getString(5));
+			bean.setCreatedDateTime(rs.getTimestamp(6));
+			bean.setModifiedDateTime(rs.getTimestamp(7));
+		}
+		return bean;
+	}
+	
 	public List search(RoleBean bean, int pageNo, int pageSize) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
-		StringBuffer sql = new StringBuffer("select * from user where 1=1");
+		StringBuffer sql = new StringBuffer("select * from st_role where 1=1");
 
 		if (bean != null) {
 
