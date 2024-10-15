@@ -85,10 +85,10 @@ public class StudentModel {
 
 	}
 
-	public StudentBean findByPk(int id) throws Exception {
+	public StudentBean findByPk(long id) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		PreparedStatement psmt = con.prepareStatement("select * from st_student where id = ?");
-		psmt.setInt(1, id);
+		psmt.setLong(1, id);
 
 		StudentBean bean = null;
 		ResultSet rs = psmt.executeQuery();
@@ -184,6 +184,38 @@ public class StudentModel {
 		}
 
 		return list;
+	}
+	
+	public StudentBean findByEmail(String email) throws Exception {
+
+		Connection conn = JDBCDataSourceRb.getConnection();
+
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_student where email = ?");
+
+		pstmt.setString(1, email);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		StudentBean bean = null;
+
+		while (rs.next()) {
+			bean = new StudentBean();
+			bean.setId(rs.getLong(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setDob(rs.getDate(4));
+			bean.setGender(rs.getString(5));
+			bean.setMobileNo(rs.getString(6));
+			bean.setEmail(rs.getString(7));
+			bean.setCollegeId(rs.getLong(8));
+			bean.setCollegeName(rs.getString(9));
+			bean.setCreatedBy(rs.getString(10));
+			bean.setModifiedBy(rs.getString(11));
+			bean.setCreatedDateTime(rs.getTimestamp(12));
+			bean.setModifiedDateTime(rs.getTimestamp(13));
+		}
+		JDBCDataSourceRb.closeConnection(conn);
+		return bean;
 	}
 
 	public StudentBean authenticate(String loginId, String password) throws Exception {

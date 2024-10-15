@@ -1,12 +1,12 @@
 package in.co.rays.bean;
 
-public class MarksheetBean {
+public class MarksheetBean extends BaseBean {
 
 	private String rollNo;
 	private long studentId;
 	private String name;
 	private Integer physics;
-	private Integer chemestry;
+	private Integer chemistry;
 	private Integer maths;
 
 	public String getRollNo() {
@@ -41,12 +41,12 @@ public class MarksheetBean {
 		this.physics = physics;
 	}
 
-	public Integer getChemestry() {
-		return chemestry;
+	public Integer getChemistry() {
+		return chemistry;
 	}
 
-	public void setChemestry(Integer chemestry) {
-		this.chemestry = chemestry;
+	public void setChemistry(Integer chemistry) {
+		this.chemistry = chemistry;
 	}
 
 	public Integer getMaths() {

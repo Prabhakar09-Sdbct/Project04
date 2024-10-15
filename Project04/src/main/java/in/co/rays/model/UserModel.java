@@ -182,6 +182,39 @@ public class UserModel {
 		return list;
 	}
 	
+	
+	public UserBean findByLogin(String login) throws Exception {
+
+		Connection conn = JDBCDataSourceRb.getConnection();
+
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ?");
+
+		pstmt.setString(1, login);
+
+		ResultSet rs = pstmt.executeQuery();
+
+		UserBean bean = null;
+
+		while (rs.next()) {
+			bean = new UserBean();
+			bean.setId(rs.getLong(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLogin(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setMobileNo(rs.getString(7));
+			bean.setRoleId(rs.getLong(8));
+			bean.setGender(rs.getString(9));
+			bean.setCreatedBy(rs.getString(10));
+			bean.setModifiedBy(rs.getString(11));
+			bean.setCreatedDateTime(rs.getTimestamp(12));
+			bean.setModifiedDateTime(rs.getTimestamp(13));
+		}
+		JDBCDataSourceRb.closeConnection(conn);
+		return bean;
+	}
+	
 	public UserBean authenticate(String loginId, String password) throws Exception {
 
 		Connection conn = JDBCDataSourceRb.getConnection();

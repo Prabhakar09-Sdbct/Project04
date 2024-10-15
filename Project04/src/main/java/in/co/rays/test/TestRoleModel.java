@@ -8,7 +8,7 @@ import java.util.List;
 import in.co.rays.bean.RoleBean;
 import in.co.rays.model.RoleModel;
 
-public class RoleTest {
+public class TestRoleModel {
 	
 	public static void main(String[] args) throws Exception {
 		testAdd();
