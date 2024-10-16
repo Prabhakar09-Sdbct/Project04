@@ -54,7 +54,7 @@ public class FacultyModel {
 	public void update(FacultyBean bean) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		PreparedStatement psmt = con.prepareStatement(
-				"update st_faculty set first_name = ?, last_name = ?, dob = ?, gender = ?, mobile_no = ? email = ?, colleg_id = ? college_name = ?,course_id = ? course_name = ?,subject_id = ? subject_name = ?, created_by = ?, modified_by = ?, created_datetime = ?, modified_datetime = ? where id = ?");
+				"update st_faculty set first_name = ?, last_name = ?, dob = ?, gender = ?, mobile_no = ?, email = ?, colleg_id = ?, college_name = ?,course_id = ?, course_name = ?, subject_id = ?, subject_name = ?, created_by = ?, modified_by = ?, created_datetime = ?, modified_datetime = ? where id = ?");
 
 		psmt.setString(1, bean.getFirstName());
 		psmt.setString(2, bean.getLastName());
