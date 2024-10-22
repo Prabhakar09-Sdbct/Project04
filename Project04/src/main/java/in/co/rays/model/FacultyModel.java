@@ -148,6 +148,10 @@ public class FacultyModel {
 		return bean;
 	}
 	
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
+	
 	public List search(FacultyBean bean, int pageNo, int pageSize) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		StringBuffer sql = new StringBuffer("select * from st_faculty where 1=1");

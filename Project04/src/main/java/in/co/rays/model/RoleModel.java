@@ -107,6 +107,10 @@ public class RoleModel {
 		return bean;
 	}
 	
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
+	
 	public List search(RoleBean bean, int pageNo, int pageSize) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		StringBuffer sql = new StringBuffer("select * from st_role where 1=1");

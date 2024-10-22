@@ -133,6 +133,10 @@ public class UserModel {
 		return bean;
 	}
 	
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
+	
 	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
