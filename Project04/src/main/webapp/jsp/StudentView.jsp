@@ -1,4 +1,4 @@
-<%@page import="in.co.rays.ctl.FacultyCtl"%>
+<%@page import="in.co.rays.ctl.StudentCtl"%>
 <%@page import="java.util.List"%>
 <%@page import="in.co.rays.ctl.UserRegistrationCtl"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
@@ -16,21 +16,19 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	<form action="<%=ORSView.FACULTY_CTL%>" method="post">
+	<form action="<%=ORSView.STUDENT_CTL%>" method="post">
 
-		<jsp:useBean id="bean" class="in.co.rays.bean.FacultyBean"
+		<jsp:useBean id="bean" class="in.co.rays.bean.StudentBean"
 			scope="request"></jsp:useBean>
 
 		<%
 		List collegeList = (List) request.getAttribute("collegeList");
-		List courseList = (List) request.getAttribute("courseList");
-		List subjectList = (List) request.getAttribute("subjectList");
 		%>
 
 		<div align="center">
 
 			<h1>
-				<font color="navy">Add Faculty</font>
+				<font color="navy">Add Student</font>
 			</h1>
 
 			<h3>
@@ -88,28 +86,19 @@
 						value="<%=DataUtility.getStringData(bean.getEmail())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("email", request)%></font></td>
 				</tr>
+
 				<tr>
 					<th>College :</th>
 					<td><%=HTMLUtility.getList("collegeId", DataUtility.getStringData(bean.getCollegeId()), collegeList)%>
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("collegeId", request)%></font></td>
 				</tr>
-				<tr>
-					<th>Course :</th>
-					<td><%=HTMLUtility.getList("courseId", DataUtility.getStringData(bean.getCourseId()), courseList)%>
-					</td>
-					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("courseId", request)%></font></td>
-				</tr>
-				<tr>
-					<th>Subject:</th>
-					<td><%=HTMLUtility.getList("subjectId", DataUtility.getStringData(bean.getSubjectId()), subjectList)%>
-					</td>
-					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("subjectId", request)%></font></td>
-				</tr>
+
+
 				<tr>
 					<th></th>
 					<td><input type="submit" name="operation"
-						value="<%=FacultyCtl.OP_SAVE%>">
+						value="<%=StudentCtl.OP_SAVE%>">
 				</tr>
 			</table>
 		</div>

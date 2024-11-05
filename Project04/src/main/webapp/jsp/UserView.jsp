@@ -14,6 +14,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="Header.jsp"%>
 	<form action="<%=ORSView.USER_CTL%>" method="post">
 
 		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
@@ -113,5 +114,6 @@
 			</table>
 		</div>
 	</form>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

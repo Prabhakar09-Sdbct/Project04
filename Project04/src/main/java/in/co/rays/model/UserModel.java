@@ -50,7 +50,8 @@ public class UserModel {
 	public void update(UserBean bean) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		PreparedStatement psmt = con.prepareStatement(
-				"update st_user set first_name = ?, last_name = ?, login = ?, password = ?, dob = ?, mobile_no = ? role_id = ?, gender = ? created_by = ?, modified_by = ?, created_datetime = ?, modified_datetime = ? where id = ?");
+				"update st_user set first_name = ?, last_name = ?, login = ?, password = ?, dob = ?,"
+				+ " mobile_no = ?, role_id = ?, gender = ?, created_by = ?, modified_by = ?, created_dateTime = ?, modified_dateTime = ? where id = ?");
 
 		
 		psmt.setString(1, bean.getFirstName());
@@ -65,9 +66,11 @@ public class UserModel {
 		psmt.setString(10, bean.getModifiedBy());
 		psmt.setTimestamp(11, bean.getCreatedDateTime());
 		psmt.setTimestamp(12, bean.getModifiedDateTime());
-		psmt.setLong(13, nextPk());
+		psmt.setLong(13, bean.getId());
 
 		int i = psmt.executeUpdate();
+		
+		System.out.println("User updated :"+i);
 
 	}
 
@@ -81,10 +84,10 @@ public class UserModel {
 
 	}
 
-	public UserBean findByPk(int id) throws Exception {
+	public UserBean findByPk(long id) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		PreparedStatement psmt = con.prepareStatement("select * from st_user where id = ?");
-		psmt.setInt(1, id);
+		psmt.setLong(1, id);
 
 		UserBean bean = null;
 		ResultSet rs = psmt.executeQuery();

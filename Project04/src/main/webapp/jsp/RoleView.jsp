@@ -11,9 +11,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="Header.jsp"%>
 	<form action="<%=ORSView.ROLE_CTL%>" method="post">
 
-      <jsp:useBean id="bean" class="in.co.rays.bean.RoleBean"
+		<jsp:useBean id="bean" class="in.co.rays.bean.RoleBean"
 			scope="request"></jsp:useBean>
 
 		<div align="center">
@@ -23,13 +24,15 @@
 			<table>
 				<tr>
 					<th>Name :</th>
-					<td><input type="text" name="name" value="<%=DataUtility.getStringData(bean.getName())%>"></td>
+					<td><input type="text" name="name"
+						value="<%=DataUtility.getStringData(bean.getName())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("name", request)%></font></td>
 				</tr>
 
 				<tr>
 					<th>Description :</th>
-					<td><input type="text" name="description" value="<%=DataUtility.getStringData(bean.getDescription())%>"></td>
+					<td><textarea type="text" name="description"
+							value="<%=DataUtility.getStringData(bean.getDescription())%>"> </textarea></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("description", request)%></font></td>
 				</tr>
 
@@ -41,5 +44,6 @@
 			</table>
 		</div>
 	</form>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

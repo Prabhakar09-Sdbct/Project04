@@ -13,6 +13,11 @@ import in.co.rays.util.DataUtility;
 import in.co.rays.util.DataValidator;
 import in.co.rays.util.ServletUtility;
 
+
+
+/**
+ * @author ASUS
+ */
 public abstract class BaseCtl extends HttpServlet {
 
 	public static final String OP_SAVE = "Save";
@@ -41,10 +46,21 @@ public abstract class BaseCtl extends HttpServlet {
 	protected void preload(HttpServletRequest request) {
 	}
 
+	/**
+	 * @param request
+	 * @return
+	 * 
+	 * 
+	 */
 	protected BaseBean populateBean(HttpServletRequest request) {
 		return null;
 	}
 
+	/**
+	 * @param dto
+	 * @param request
+	 * @return
+	 */
 	protected BaseBean populateDTO(BaseBean dto, HttpServletRequest request) {
 
 		String createdBy = request.getParameter("createdBy");

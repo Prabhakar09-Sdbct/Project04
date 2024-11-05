@@ -12,12 +12,12 @@ public class TestStudentModel {
 
 	public static void main(String[] args) throws Exception {
 
-		// testAdd();
+		 testAdd();
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
 		// testFindByEmail();
-		testSearch();
+		//testSearch();
 	}
 
 	public static void testAdd() throws Exception {

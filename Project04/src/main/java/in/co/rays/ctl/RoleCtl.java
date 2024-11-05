@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.bean.BaseBean;
+import in.co.rays.bean.FacultyBean;
 import in.co.rays.bean.RoleBean;
 import in.co.rays.util.DataUtility;
 import in.co.rays.util.DataValidator;
@@ -25,7 +26,7 @@ public class RoleCtl extends BaseCtl {
 			request.setAttribute("name", PropertyReader.getValue("error.require", "Name"));
 			pass =false;
 		} else if(!DataValidator.isName(DataUtility.getStringData(request.getParameter("name")))){
-			request.setAttribute("name", "Invalid first name");
+			request.setAttribute("name", "Invalid Name");
 			pass =false;
 		}
 		
@@ -53,7 +54,15 @@ public class RoleCtl extends BaseCtl {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ServletUtility.forward(getView(), req, resp);
+		String op = DataUtility.getString(req.getParameter("operation"));
+
+		System.out.println(req.getParameter("operation"));
+
+		if (OP_SAVE.equalsIgnoreCase(op)) {
+			RoleBean bean = (RoleBean) populateBean(req);
+			ServletUtility.setBean(bean, req);
+			ServletUtility.forward(getView(), req, resp);
+		}
 	}
 
 	@Override

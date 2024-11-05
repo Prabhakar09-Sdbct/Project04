@@ -11,11 +11,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="Header.jsp"%>
 	<form action="<%=ORSView.LOGIN_CTL%>" method="post">
 
 		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
 			scope="request"></jsp:useBean>
-			
+
 		<div align="center">
 			<table>
 				<h1>
@@ -23,20 +24,24 @@
 				</h1>
 				<tr>
 					<th>Login Id</th>
-					<td><input type="text" name="login" value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
+					<td><input type="text" name="login"
+						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
 				<tr>
 					<th>Password</th>
-					<td><input type="text" name="password" value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
+					<td><input type="text" name="password"
+						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_IN%>"></td>
+					<td><input type="submit" name="operation"
+						value="<%=LoginCtl.OP_SIGN_IN%>"></td>
 				</tr>
 			</table>
 		</div>
 	</form>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>
