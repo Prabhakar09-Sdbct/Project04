@@ -38,7 +38,7 @@ public class CourseCtl extends BaseCtl {
 		}
 
 		if (DataValidator.isNull(request.getParameter("description"))) {
-			request.setAttribute("description", PropertyReader.getValue("error.require", "Name"));
+			request.setAttribute("description", PropertyReader.getValue("error.require", "Description"));
 			pass = false;
 		}
 		return pass;
@@ -73,10 +73,13 @@ public class CourseCtl extends BaseCtl {
 			CourseBean bean = (CourseBean) populateBean(req);
 			try {
 				model.add(bean);
+				ServletUtility.setSuccessMessage("Data Added successfully", req);
 				ServletUtility.setBean(bean, req);
 				ServletUtility.forward(getView(), req, resp);
 			} catch (Exception e) {
-				e.printStackTrace();
+				ServletUtility.setErrorMessage(e.getMessage(), req);
+				ServletUtility.setBean(bean, req);
+				ServletUtility.forward(getView(), req, resp);
 			}
 		}
 	}

@@ -46,9 +46,6 @@
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
 				bean = (MarksheetBean) it.next();
-				MarksheetModel model = new MarksheetModel();
-				MarksheetBean marksheetBean = new MarksheetBean();
-				marksheetBean = model.findByPk(bean.getStudentId());
 			%>
 			<tr align="center">
 				<td><input type="checkbox"></td>
