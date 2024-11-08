@@ -16,7 +16,7 @@ public class HTMLUtility {
 		StringBuffer sb = new StringBuffer(
 				"<select style=\"width: 173px;text-align-last: center;\"; class='form-control' name='" + name + "'>");
 
-		sb.append("\n<option selected value=''> --Select-- </option>");
+		sb.append("\n<option selected value=''>-------------Select-------------</option>");
 
 		Set<String> keys = map.keySet();
 		String val = null;
@@ -47,7 +47,7 @@ public class HTMLUtility {
 		StringBuffer sb = new StringBuffer("<select style=\"width: 173px;text-align-last: center;\"; "
 				+ "class='form-control' name='" + name + "'>");
 
-		sb.append("\n<option selected value=''> --Select-- </option>");
+		sb.append("\n<option selected value=''>-------------Select-------------</option>");
 
 		String key = null;
 		String val = null;

@@ -98,6 +98,7 @@ public class StudentCtl extends BaseCtl {
 	protected BaseBean populateBean(HttpServletRequest request) {
 		StudentBean bean = new StudentBean();
 		bean.setId(DataUtility.getLong(request.getParameter("id")));
+		System.out.println("id>>>>>>"+DataUtility.getLong(request.getParameter("id")));
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
 		bean.setLastName(DataUtility.getString(request.getParameter("lastName")));
 		bean.setDob(DataUtility.getDate(request.getParameter("dob")));
@@ -141,12 +142,27 @@ public class StudentCtl extends BaseCtl {
 		CollegeModel collegeModel = new CollegeModel();
 		if (OP_SAVE.equalsIgnoreCase(op)) {
 			StudentBean bean = (StudentBean) populateBean(req);
-			
+
 			try {
 				CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
 				bean.setCollegeName(collegeBean.getName());
 				model.add(bean);
 				ServletUtility.setSuccessMessage("Data Added successfully", req);
+				ServletUtility.setBean(bean, req);
+				ServletUtility.forward(getView(), req, resp);
+			} catch (Exception e) {
+				ServletUtility.setErrorMessage(e.getMessage(), req);
+				ServletUtility.setBean(bean, req);
+				ServletUtility.forward(getView(), req, resp);
+			}
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			StudentBean bean = (StudentBean) populateBean(req);
+			try {
+				CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
+				bean.setCollegeName(collegeBean.getName());
+				System.out.println(" id is : "+bean.getId());
+				model.update(bean);
+				ServletUtility.setSuccessMessage("Data updated successfully", req);
 				ServletUtility.setBean(bean, req);
 				ServletUtility.forward(getView(), req, resp);
 			} catch (Exception e) {

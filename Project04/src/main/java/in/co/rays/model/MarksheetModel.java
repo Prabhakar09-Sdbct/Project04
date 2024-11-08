@@ -116,6 +116,10 @@ public class MarksheetModel {
 		System.out.println("data deleted => " + i);
 
 	}
+	
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
 
 	public MarksheetBean findByPk(long id) throws Exception {
 

@@ -72,29 +72,29 @@
 			</table>
 			<br>
 
-			<table border="1" width="100%" align="center" cellpadding=6px
-				cellspacing=".2">
-				<tr>
-					<th><input type="checkbox" id="select_all" name="select"></th>
-					<th width="5%">S.No</th>
-					<th width="30%">Subject Name</th>
-					<th width="15%">Course Name</th>
-					<th width="40%">Description</th>
-					<th width="5%">Edit</th>
+			<table  border="1" width="100%" align="center" cellpadding=7px
+			cellspacing=".2">
+				<tr style="background: skyblue">
+					<th><input type="checkbox" id="selectall" name="select"></th>
+					<th >S.No</th>
+					<th >Subject Name</th>
+					<th >Course Name</th>
+					<th >Description</th>
+					<th >Edit</th>
 				</tr>
 
 				<%
 				while (it.hasNext()) {
 					bean = it.next();
 				%>
-				<tr>
-					<td><input type="checkbox" class="checkbox" name="ids"
+				<tr align="center">
+					<td><input type="checkbox" class="case" name="ids"
 						value="<%=bean.getId()%>"></td>
-					<td style="text-align: center;"><%=index++%></td>
-					<td style="text-align: center; text-transform: capitalize;"><%=bean.getName()%></td>
-					<td style="text-align: center; text-transform: capitalize;"><%=bean.getCourseName()%></td>
-					<td style="text-align: center; text-transform: capitalize;"><%=bean.getDescription()%></td>
-					<td style="text-align: center;"><a
+					<td ><%=index++%></td>
+					<td ><%=bean.getName()%></td>
+					<td ><%=bean.getCourseName()%></td>
+					<td ><%=bean.getDescription()%></td>
+					<td ><a
 						href="SubjectCtl?id=<%=bean.getId()%>">Edit</a></td>
 				</tr>
 				<%

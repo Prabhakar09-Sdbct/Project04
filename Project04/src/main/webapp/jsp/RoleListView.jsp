@@ -27,7 +27,6 @@
 			<h3>
 				<font color="green"><%=ServletUtility.getSuccessMessage(request)%></font>
 			</h3>
-
 		</div>
 
 		<%
@@ -35,8 +34,7 @@
 
 		int next = DataUtility.getInt(request.getAttribute("nextlist").toString());
 		%>
-
-
+		
 		<%
 		int pageNo = ServletUtility.getPageNo(request);
 		int pageSize = ServletUtility.getPageSize(request);
@@ -51,7 +49,6 @@
 		<table width="100%" align="center">
 			<tr>
 				<td align="center"><label>Role :</label> <%=HTMLUtility.getList("roleid", String.valueOf(bean.getId()), roleList)%>
-
 					&nbsp; <input type="submit" name="operation"
 					value="<%=RoleListCtl.OP_SEARCH%>"> &nbsp; <input
 					type="submit" name="operation" value="<%=RoleListCtl.OP_RESET%>">
@@ -61,11 +58,10 @@
 		</table>
 		<br>
 
-		<table border="1" width="100%" align="center" cellpadding=7px
+		<table  border="1" width="100%" align="center" cellpadding=7px
 			cellspacing=".2">
-			<tr>
-				<th><input type="checkbox" id="select_all" name="select"></th>
-
+			<tr style="background: skyblue">
+				<th><input type="checkbox" id="selectall" name="select"></th>
 				<th>S.No.</th>
 				<th>Role</th>
 				<th>Description</th>
@@ -77,9 +73,8 @@
 				RoleBean bean2 = it.next();
 			%>
 
-
 			<tr align="center">
-				<td><input type="checkbox" class="checkbox" name="ids"
+				<td><input type="checkbox" class="case" name="ids"
 					value="<%=bean2.getId()%>"
 					<%if (userBean.getId() == bean2.getId() || bean2.getId() == RoleBean.ADMIN) {%>
 					<%="disabled"%> <%}%>></td>

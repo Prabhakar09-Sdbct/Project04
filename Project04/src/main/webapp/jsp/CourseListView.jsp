@@ -30,9 +30,9 @@
 				<font color="navy">Course List</font>
 			</h1>
 		</div>
-		<table border="1" width="100%" align="center" cellpadding=6px
+		<table  border="1" width="100%" align="center" cellpadding=7px
 			cellspacing=".2">
-			<tr>
+			<tr style="background: skyblue">
 				<th><input type="checkbox" id="selectall"></th>
 				<th>S. No.</th>
 				<th>Name</th>

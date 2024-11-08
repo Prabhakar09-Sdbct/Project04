@@ -74,11 +74,11 @@ public class UserModel {
 
 	}
 
-	public void delete(int id) throws Exception {
+	public void delete(long id) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		PreparedStatement psmt = con.prepareStatement("delete from st_user where id = ?");
 
-		psmt.setInt(1, id);
+		psmt.setLong(1, id);
 
 		int i = psmt.executeUpdate();
 
@@ -154,6 +154,10 @@ public class UserModel {
 
 			if (bean.getLastName() != null && bean.getLastName().length() > 0) {
 				sql.append(" and lastName like '" + bean.getLastName() + "%'");
+			}
+			
+			if (bean.getRoleId() > 0) {
+				sql.append(" and role_id like '" + bean.getRoleId() + "%'");
 			}
 		}
 
