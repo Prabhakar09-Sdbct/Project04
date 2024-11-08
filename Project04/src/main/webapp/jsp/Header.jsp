@@ -1,17 +1,29 @@
-<!DOCTYPE html>
 <%@page import="in.co.rays.bean.RoleBean"%>
 <%@page import="in.co.rays.ctl.LoginCtl"%>
 <%@page import="in.co.rays.ctl.ORSView"%>
 <%@page import="in.co.rays.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=ORSView.APP_CONTEXT%>/js/checkbox.js"></script>
+
+<!-- jQuery UI CSS -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<!-- jQuery UI Library -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Our custom JavaScript file -->
+<script src="<%=ORSView.APP_CONTEXT%>/js/datepicker.js"></script>
 </head>
 
 <body>

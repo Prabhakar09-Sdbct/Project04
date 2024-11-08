@@ -2,9 +2,6 @@
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.util.ServletUtility"%>
 <%@page import="in.co.rays.ctl.ORSView"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -30,12 +27,15 @@
 				<font color="red"><%=ServletUtility.getErrorMessage(request)%></font>
 				<font color="green"><%=ServletUtility.getSuccessMessage(request)%></font>
 			</h3>
-            <!-- Hidden Fields -->
-            <input type="hidden" name="id" value="<%= bean.getId() %>">
-            <input type="hidden" name="createdBy" value="<%= bean.getCreatedBy() %>">
-            <input type="hidden" name="modifiedBy" value="<%= bean.getModifiedBy() %>">
-            <input type="hidden" name="createdDateTime" value="<%= DataUtility.getTimestamp(bean.getCreatedDateTime()) %>">
-            <input type="hidden" name="modifiedDateTime" value="<%= DataUtility.getTimestamp(bean.getModifiedDateTime()) %>">
+			<!-- Hidden Fields -->
+			<input type="hidden" name="id" value="<%=bean.getId()%>"> <input
+				type="hidden" name="createdBy" value="<%=bean.getCreatedBy()%>">
+			<input type="hidden" name="modifiedBy"
+				value="<%=bean.getModifiedBy()%>"> <input type="hidden"
+				name="createdDateTime"
+				value="<%=DataUtility.getTimestamp(bean.getCreatedDateTime())%>">
+			<input type="hidden" name="modifiedDateTime"
+				value="<%=DataUtility.getTimestamp(bean.getModifiedDateTime())%>">
 
 			<table>
 				<tr>
@@ -52,13 +52,13 @@
 				</tr>
 				<tr>
 					<th>Date :</th>
-					<td><input type="text" name="date"
-						value="<%=DataUtility.getStringData(bean.getDate())%>"></td>
+					<td><input type="text" id="udate" name="date"
+						value="<%=DataUtility.getDateString(bean.getDate())%>"></td>
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("date", request)%></font></td>
 				</tr>
 				<tr>
 					<th>Quantity :</th>
-					<td><input type="text" name="quantity"
+					<td><input type="text" name="quantity" placeholder="Select Date"
 						value="<%=DataUtility.getStringData(bean.getQuantity())%>"></td>
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("quantity", request)%></font></td>
 				</tr>
