@@ -39,6 +39,8 @@ public interface ORSView {
 	public String SUBJECT_LIST_VIEW = PAGE_FOLDER + "/SubjectListView.jsp";
 	public String TIMETABLE_VIEW = PAGE_FOLDER + "/TimeTableView.jsp";
 	public String TIMETABLE_LIST_VIEW = PAGE_FOLDER + "/TimeTableListView.jsp";
+	public String SHOPPINGCART_VIEW = PAGE_FOLDER + "/ShoppingCartView.jsp";
+	public String SHOPPINGCART_LIST_VIEW = PAGE_FOLDER + "/ShoppingCartListView.jsp";
 	public String ERROR_VIEW = PAGE_FOLDER + "/ErrorView.jsp";
 	// public String ERROR_VIEW5 = PAGE_FOLDER + "/ErrorView5.jsp";
 
@@ -69,6 +71,8 @@ public interface ORSView {
 	public String SUBJECT_LIST_CTL = APP_CONTEXT + "/SubjectListCtl";
 	public String TIMETABLE_CTL = APP_CONTEXT + "/TimeTableCtl";
 	public String TIMETABLE_LIST_CTL = APP_CONTEXT + "/TimeTableListCtl";
+	public String SHOPPINGCART_CTL = APP_CONTEXT + "/ShoppingCartCtl";
+	public String SHOPPINGCART_LIST_CTL = APP_CONTEXT + "/ShoppingCartListCtl";
 	public String ERROR_CTL = APP_CONTEXT + "/ErrorCtl";
 
 }

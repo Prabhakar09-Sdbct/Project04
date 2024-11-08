@@ -170,6 +170,9 @@ public class StudentCtl extends BaseCtl {
 				ServletUtility.setBean(bean, req);
 				ServletUtility.forward(getView(), req, resp);
 			}
+		}else if (OP_RESET.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.USER_CTL, req, resp);
+			return;
 		}
 	}
 

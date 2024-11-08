@@ -53,7 +53,7 @@
 				<font color="red"> <%=ServletUtility.getErrorMessage(request)%>
 				</font>
 			</h3>
-			<input name="id" value="<%=bean.getId()%>">
+			<input type="hidden" name="id" value="<%=bean.getId()%>">
 			<table>
 				<tr>
 					<th>First Name:</th>

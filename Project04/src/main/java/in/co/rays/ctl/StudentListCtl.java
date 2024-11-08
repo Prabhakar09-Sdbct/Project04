@@ -59,9 +59,6 @@ public class StudentListCtl extends BaseCtl {
 
 		StudentBean bean = (StudentBean) populateBean(request);
 		StudentModel model = new StudentModel();
-
-		String op = DataUtility.getString(request.getParameter("operation"));
-
 		try {
 			list = model.search(bean, pageNo, pageSize);
 			if (list == null || list.size() == 0) {
