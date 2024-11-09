@@ -8,55 +8,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.bean.BaseBean;
-import in.co.rays.bean.ShoppingCartBean;
+import in.co.rays.bean.TaskBean;
 import in.co.rays.bean.UserBean;
 import in.co.rays.exception.ApplicationException;
 import in.co.rays.exception.DuplicateRecordException;
-import in.co.rays.model.ShoppingCartModel;
+import in.co.rays.model.TaskModel;
 import in.co.rays.model.UserModel;
 import in.co.rays.util.DataUtility;
 import in.co.rays.util.DataValidator;
 import in.co.rays.util.PropertyReader;
 import in.co.rays.util.ServletUtility;
 
-@WebServlet(name = "ShoppingCartCtl", urlPatterns = { "/ShoppingCartCtl" })
-public class ShoppingCartCtl extends BaseCtl {
+@WebServlet(name = "TaskCtl", urlPatterns = { "/TaskCtl" })
+public class TaskCtl extends BaseCtl {
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 		boolean pass = true;
 
-		if (DataValidator.isNull(request.getParameter("name"))) {
-			request.setAttribute("name", PropertyReader.getValue("error.require", "Name"));
+		if (DataValidator.isNull(request.getParameter("title"))) {
+			request.setAttribute("title", PropertyReader.getValue("error.require", "Tile"));
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("product"))) {
-			request.setAttribute("product", PropertyReader.getValue("error.require", "Product"));
+		if (DataValidator.isNull(request.getParameter("details"))) {
+			request.setAttribute("details", PropertyReader.getValue("error.require", "Details"));
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("date"))) {
-			request.setAttribute("date", PropertyReader.getValue("error.require", "date"));
+		if (DataValidator.isNull(request.getParameter("assignedTo"))) {
+			request.setAttribute("assignedTo", PropertyReader.getValue("error.require", "Assigned To"));
 			pass = false;
 		}
-		if (DataValidator.isNull(request.getParameter("quantity")) || (request.getParameter("quantity").equals("0"))) {
-			request.setAttribute("quantity", PropertyReader.getValue("error.require", "Quantity"));
+		
+		if (DataValidator.isNull(request.getParameter("status"))) {
+			request.setAttribute("status", PropertyReader.getValue("error.require", "Status"));
 			pass = false;
 		}
-
+		
 		return pass;
 	}
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
-		ShoppingCartBean bean = new ShoppingCartBean();
+		TaskBean bean = new TaskBean();
 
 		bean.setId(DataUtility.getLong(request.getParameter("id")));
-		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setProduct(DataUtility.getString(request.getParameter("product")));
-		bean.setDate(DataUtility.getDate(request.getParameter("date")));
-		bean.setQuantity(DataUtility.getInt(request.getParameter("quantity")));
+		bean.setTitle(DataUtility.getString(request.getParameter("title")));
+		bean.setDetails(DataUtility.getString(request.getParameter("details")));
+		bean.setAssignedTo(DataUtility.getString(request.getParameter("assignedTo")));
+		bean.setStatus(DataUtility.getString(request.getParameter("status")));
 		populateDTO(bean, request);
 		return bean;
 	}
@@ -69,10 +70,10 @@ public class ShoppingCartCtl extends BaseCtl {
 
 		if (id > 0) {
 
-			ShoppingCartModel model = new ShoppingCartModel();
+			TaskModel model = new TaskModel();
 
 			try {
-				ShoppingCartBean bean = model.findByPK(id);
+				TaskBean bean = model.findByPK(id);
 				ServletUtility.setBean(bean, request);
 			} catch (ApplicationException e) {
 				e.printStackTrace();
@@ -89,10 +90,10 @@ public class ShoppingCartCtl extends BaseCtl {
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		long id = DataUtility.getLong(request.getParameter("id"));
-		ShoppingCartBean bean = (ShoppingCartBean) populateBean(request);
+		TaskBean bean = (TaskBean) populateBean(request);
 
 		// get model
-		ShoppingCartModel model = new ShoppingCartModel();
+		TaskModel model = new TaskModel();
 
 		if (OP_SAVE.equalsIgnoreCase(op) || OP_UPDATE.equalsIgnoreCase(op)) {
 			try {
@@ -111,10 +112,10 @@ public class ShoppingCartCtl extends BaseCtl {
 			}
 
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.SHOPPINGCART_CTL, request, response);
+			ServletUtility.redirect(ORSView.TASK_CTL, request, response);
 			return;
 		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.SHOPPINGCART_LIST_CTL, request, response);
+			ServletUtility.redirect(ORSView.TASK_LIST_CTL, request, response);
 			return;
 		}
 		ServletUtility.setBean(bean, request);
@@ -124,7 +125,7 @@ public class ShoppingCartCtl extends BaseCtl {
 
 	@Override
 	protected String getView() {
-		return ORSView.SHOPPINGCART_VIEW;
+		return ORSView.TASK_VIEW;
 	}
 
 }

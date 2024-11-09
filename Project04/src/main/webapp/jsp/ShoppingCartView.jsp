@@ -40,26 +40,26 @@
 			<table>
 				<tr>
 					<th>Name :</th>
-					<td><input type="text" name="name"
+					<td><input type="text" name="name" placeholder="Select Name"
 						value="<%=DataUtility.getStringData(bean.getName())%>"></td>
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("name", request)%></font></td>
 				</tr>
 				<tr>
 					<th>Product :</th>
-					<td><input type="text" name="product"
+					<td><input type="text" name="product" placeholder="Select Product"
 						value="<%=DataUtility.getStringData(bean.getProduct())%>"></td>
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("product", request)%></font></td>
 				</tr>
 				<tr>
 					<th>Date :</th>
-					<td><input type="text" id="udate" name="date"
+					<td><input type="text" id="udate" name="date" placeholder="Select Date"
 						value="<%=DataUtility.getDateString(bean.getDate())%>"></td>
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("date", request)%></font></td>
 				</tr>
 				<tr>
 					<th>Quantity :</th>
-					<td><input type="text" name="quantity" placeholder="Select Date"
-						value="<%=DataUtility.getStringData(bean.getQuantity())%>"></td>
+					<td><input type="text" name="quantity" placeholder="Select Quantity"
+						value="<%= DataUtility.getStringData(bean.getQuantity()).equals("0") ? "" : DataUtility.getStringData(bean.getQuantity()) %>">
 					<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("quantity", request)%></font></td>
 				</tr>
 

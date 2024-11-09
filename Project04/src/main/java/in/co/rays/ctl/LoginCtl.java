@@ -31,7 +31,7 @@ public class LoginCtl extends BaseCtl {
 		
 		boolean pass = true;
 		
-		if(OP_LOG_OUT.equalsIgnoreCase(op)) {
+		if (OP_LOG_OUT.equalsIgnoreCase(op) || OP_SIGN_UP.equalsIgnoreCase(op)) {
 			return pass;
 		}
 
@@ -62,9 +62,17 @@ public class LoginCtl extends BaseCtl {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String op = DataUtility.getString(request.getParameter("operation"));
 
-		ServletUtility.forward(getView(), req, resp);
+		// Handle logout operation
+		if (OP_LOG_OUT.equalsIgnoreCase(op)) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			ServletUtility.setSuccessMessage("Logged out successfully.", request);
+		}
+
+		ServletUtility.forward(getView(), request, response);
 	}
 
 	@Override

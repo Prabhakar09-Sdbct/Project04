@@ -5,18 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import in.co.rays.bean.ShoppingCartBean;
+import in.co.rays.bean.TaskBean;
 import in.co.rays.util.JDBCDataSourceRb;
 
-public class ShoppingCartModel {
+public class TaskModel {
 
 	public Integer nextPk() throws Exception {
 
 		Connection con = JDBCDataSourceRb.getConnection();
-		PreparedStatement psmt = con.prepareStatement("select max(id) from st_shopping_cart");
+		PreparedStatement psmt = con.prepareStatement("select max(id) from st_task");
 
 		ResultSet rs = psmt.executeQuery();
 
@@ -29,15 +28,16 @@ public class ShoppingCartModel {
 		return pk + 1;
 	}
 
-	public void add(ShoppingCartBean bean) throws Exception {
+	public void add(TaskBean bean) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
-		PreparedStatement psmt = con.prepareStatement("insert into st_shopping_cart values(?,?,?,?,?,?,?,?,?)");
+		PreparedStatement psmt = con.prepareStatement("insert into st_task values(?,?,?,?,?,?,?,?,?)");
 
 		psmt.setLong(1, nextPk());
-		psmt.setString(2, bean.getName());
-		psmt.setString(3, bean.getProduct());
-		psmt.setTimestamp(4, new Timestamp(bean.getDate().getTime()));
-		psmt.setInt(5, bean.getQuantity());
+		psmt.setString(2, bean.getTitle());
+		psmt.setString(3, bean.getDetails());
+		psmt.setString(4, bean.getAssignedTo());
+		psmt.setString(5, bean.getStatus());
+		
 		psmt.setString(6, bean.getCreatedBy());
 		psmt.setString(7, bean.getModifiedBy());
 		psmt.setTimestamp(8, bean.getCreatedDateTime());
@@ -49,24 +49,21 @@ public class ShoppingCartModel {
 		System.out.println("Data added " + i);
 	}
 
-	public void update(ShoppingCartBean bean) throws Exception {
+	public void update(TaskBean bean) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 		
-		StringBuffer sql = new StringBuffer("update st_shopping_cart set name = ?, product = ?, `date` = ?, quantity = ?, "
+		StringBuffer sql = new StringBuffer("update st_task set title = ?, details = ?, assigned_to = ?, status = ?, "
 				+ "created_by =?, modified_by = ?, created_datetime = ?, modified_datetime = ? where id = ?");
 		
 		System.out.println("sql update is : "+sql.toString());
 		PreparedStatement psmt = con
 				.prepareStatement(sql.toString());
 
-		psmt.setString(1, bean.getName());
-		psmt.setString(2, bean.getProduct());
-		if (bean.getDate() != null) {
-		    psmt.setTimestamp(3, new Timestamp(bean.getDate().getTime()));
-		} else {
-		    psmt.setTimestamp(3, null);
-		}
-		psmt.setInt(4, bean.getQuantity());
+		psmt.setString(1, bean.getTitle());
+		psmt.setString(2, bean.getDetails());
+		psmt.setString(3, bean.getAssignedTo());
+		psmt.setString(4, bean.getStatus());
+		
 		psmt.setString(5, bean.getCreatedBy());
 		psmt.setString(6, bean.getModifiedBy());
 		psmt.setTimestamp(7, bean.getCreatedDateTime());
@@ -81,7 +78,7 @@ public class ShoppingCartModel {
 
 	public void delete(long id) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
-		PreparedStatement psmt = con.prepareStatement("delete from st_shopping_cart where id = ?");
+		PreparedStatement psmt = con.prepareStatement("delete from st_task where id = ?");
 
 		psmt.setLong(1, id);
 
@@ -91,22 +88,23 @@ public class ShoppingCartModel {
 		System.out.println("Data deleted " + i);
 	}
 
-	public ShoppingCartBean findByPK(long id) throws Exception {
+	public TaskBean findByPK(long id) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
-		PreparedStatement psmt = con.prepareStatement("select * from st_shopping_cart where id = ?");
+		PreparedStatement psmt = con.prepareStatement("select * from st_task where id = ?");
 
 		psmt.setLong(1, id);
 
-		ShoppingCartBean bean = null;
+		TaskBean bean = null;
 		ResultSet rs = psmt.executeQuery();
 
 		while (rs.next()) {
-			bean = new ShoppingCartBean();
+			bean = new TaskBean();
 			bean.setId(rs.getLong(1));
-			bean.setName(rs.getString(2));
-			bean.setProduct(rs.getString(3));
-		    bean.setDate(rs.getTimestamp(4));
-			bean.setQuantity(rs.getInt(5));
+			bean.setTitle(rs.getString(2));
+			bean.setDetails(rs.getString(3));
+			bean.setAssignedTo(rs.getString(4));
+			bean.setStatus(rs.getString(5));
+			
 			bean.setCreatedBy(rs.getString(6));
 			bean.setModifiedBy(rs.getString(7));
 			bean.setCreatedDateTime(rs.getTimestamp(8));
@@ -121,30 +119,30 @@ public class ShoppingCartModel {
 		return search(null, 0, 0);
 	}
 
-	public List search(ShoppingCartBean bean, int pageNo, int pageSize) throws Exception {
+	public List search(TaskBean bean, int pageNo, int pageSize) throws Exception {
 		Connection con = JDBCDataSourceRb.getConnection();
 
-		StringBuffer sql = new StringBuffer("select * from st_shopping_cart where 1=1");
+		StringBuffer sql = new StringBuffer("select * from st_task where 1=1");
 
 		if (bean != null) {
 			if (bean.getId() > 0) {
 				sql.append(" and id =" + bean.getId());
 			}
 
-			if (bean.getName() != null && bean.getName().length() > 0) {
-				sql.append(" and name like'" + bean.getName() + "%'");
+			if (bean.getTitle() != null && bean.getTitle().length() > 0) {
+				sql.append(" and title like'" + bean.getTitle() + "%'");
 			}
 
-			if (bean.getProduct() != null && bean.getProduct().length() > 0) {
-				sql.append(" and product like'" + bean.getProduct() + "%'");
+			if (bean.getDetails() != null && bean.getDetails().length() > 0) {
+				sql.append(" and details like'" + bean.getDetails() + "%'");
 			}
 
-			if (bean.getDate() != null) {
-				sql.append(" and date like'" + bean.getDate() + "%'");
+			if (bean.getAssignedTo() != null && bean.getAssignedTo().length() > 0) {
+				sql.append(" and assigned_to like'" + bean.getAssignedTo() + "%'");
 			}
 
-			if (bean.getQuantity() > 0) {
-				sql.append(" and quantity =" + bean.getQuantity());
+			if (bean.getStatus() != null && bean.getStatus().length() > 0) {
+				sql.append(" and status like'" + bean.getStatus() + "%'");
 			}
 		}
 
@@ -160,12 +158,13 @@ public class ShoppingCartModel {
 		ResultSet rs = psmt.executeQuery();
 		List list = new ArrayList();
 		while (rs.next()) {
-			bean = new ShoppingCartBean();
+			bean = new TaskBean();
 			bean.setId(rs.getLong(1));
-			bean.setName(rs.getString(2));
-			bean.setProduct(rs.getString(3));
-			bean.setDate(rs.getTimestamp(4));
-			bean.setQuantity(rs.getInt(5));
+			bean.setTitle(rs.getString(2));
+			bean.setDetails(rs.getString(3));
+			bean.setAssignedTo(rs.getString(4));
+			bean.setStatus(rs.getString(5));
+			
 			bean.setCreatedBy(rs.getString(6));
 			bean.setModifiedBy(rs.getString(7));
 			bean.setCreatedDateTime(rs.getTimestamp(8));

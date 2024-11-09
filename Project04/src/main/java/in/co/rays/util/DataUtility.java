@@ -37,6 +37,7 @@ public class DataUtility {
 			return 0;
 		}
 	}
+	
 
 	public static long getLong(String val) {
 		if (DataValidator.isLong(val)) {

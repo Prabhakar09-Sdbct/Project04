@@ -22,6 +22,10 @@
 				<h1>
 					<font color="navy">Login</font>
 				</h1>
+				<h3>
+					<font color="red"><%=ServletUtility.getErrorMessage(request)%></font>
+					<font color="green"><%=ServletUtility.getSuccessMessage(request)%></font>
+				</h3>
 				<tr>
 					<th>Login Id</th>
 					<td><input type="text" name="login"
@@ -36,8 +40,10 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation"
-						value="<%=LoginCtl.OP_SIGN_IN%>"></td>
+					<td colspan="2"><input type="submit" name="operation"
+						value="<%=LoginCtl.OP_SIGN_IN%>"> &nbsp; <input
+						type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_UP%>">
+						&nbsp;</td>
 				</tr>
 			</table>
 		</div>
